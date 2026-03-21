@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply w-full border p-2 rounded-lg focus:ring-2 focus:ring-orange-400 outline-none;
+}
+
+.btn-primary {
+  @apply bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition;
+}
+
+.react-calendar {
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.react-calendar__tile--active {
+  background: orange !important;
+  color: white;
+}
