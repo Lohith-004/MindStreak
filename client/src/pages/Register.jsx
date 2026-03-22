@@ -7,9 +7,11 @@ function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const register = async () => {
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+      await axios.post(`${API}/api/auth/register`, {
         email,
         password,
       });
@@ -17,6 +19,7 @@ function Register() {
       alert("Registered Successfully!");
       navigate("/");
     } catch (err) {
+      console.log(err);
       alert(err.response?.data?.message || "Error registering");
     }
   };
