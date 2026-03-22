@@ -69,7 +69,7 @@ study-tracker/
 
 ### 1️⃣ Clone Repository
 
-git clone https://github.com/Lohith-004/Study-Tracker
+git clone https://github.com/Lohith-004/MindStreak
 cd Study-Tracker
 
 ### 2️⃣ Setup Backend
@@ -154,9 +154,9 @@ If you like this project:
 
 ---
 
-## 🌐 Deployment Link
+## 🌐 Live Demo
 
-🚧 Coming Soon...
+ https://mind-streak.vercel.app
 
 ---
 
