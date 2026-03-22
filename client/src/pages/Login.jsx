@@ -5,50 +5,58 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const login = async () => {
-    const res = await axios.post("http://localhost:5000/api/auth/login", {
-      email,
-      password,
-    });
-    localStorage.setItem("token", res.data.token);
-    navigate("/dashboard");
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        { email, password },
+      );
+
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
+    }
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 to-purple-600">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-80">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-slate-900">
+      <div className="bg-white dark:bg-slate-800 p-8 rounded-xl shadow w-80">
+        <h2 className="text-xl font-bold mb-4 text-center text-gray-800 dark:text-white">
+          Login
+        </h2>
 
         <input
-          className="w-full p-2 border rounded mb-4"
+          type="email"
           placeholder="Email"
+          className="input mb-3"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <div className="relative">
-          <input
-            className="w-full p-2 border rounded"
-            type={show ? "text" : "password"}
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <span
-            className="absolute right-3 top-2 cursor-pointer"
-            onClick={() => setShow(!show)}
-          >
-            👁️
-          </span>
-        </div>
+        <input
+          type="password"
+          placeholder="Password"
+          className="input mb-4"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <button
-          className="w-full bg-indigo-600 text-white p-2 rounded mt-4"
-          onClick={login}
-        >
+        <button onClick={login} className="btn-primary w-full">
           Login
         </button>
+
+        <p className="text-sm text-center mt-4 text-gray-600 dark:text-gray-300">
+          Don’t have an account?{" "}
+          <span
+            className="text-orange-500 cursor-pointer"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </span>
+        </p>
       </div>
     </div>
   );
